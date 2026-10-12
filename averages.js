@@ -5,7 +5,7 @@ function running() {
 }
 
 function findMax(data) {
-    let max = -Infinity;
+    let max = data[0];
 
     for (const num of data) {
         max = num >= max ? num : max;
@@ -25,7 +25,7 @@ function calcHeight(data, maxValue, maxHeight, windowHeight) {
 }
 
 function setup() {
-    const WIDTH = 400;
+    const WIDTH = 300;
     const HEIGHT = 400;
     const TITLE = "Averages";
     const FPS = 60;
@@ -58,22 +58,26 @@ function calcAverage(data) {
     return sum / data.length;
 }
 
-function drawAvgLine(windowWidth, newHeights) {
-    const avg = calcAverage(newHeights);
+function drawAvgLine(w) {
+    const avg = w.HEIGHT - calcAverage(w.data) * (w.maxHeight / w.maxValue);
+    r.DrawLine(0, avg, w.WIDTH, avg, r.RED);
+}
 
-    r.DrawLine(0, avg, windowWidth, avg, r.RED);
+function drawBar(w) {
+    for (let i = 0; i < w.newHeights.length; i++) {
+        const x = i * (w.barWidth + w.gap);
+
+        r.DrawRectangle(x, w.newHeights[i], w.barWidth, w.HEIGHT, r.DARKBLUE);
+    }
 }
 
 function draw(w) {
     r.BeginDrawing();
     r.ClearBackground(r.WHITE);
 
-    for (let i = 0; i < w.newHeights.length; i++) {
-        const x = i * (w.barWidth + w.gap);
-        r.DrawRectangle(x, w.newHeights[i], w.barWidth, w.HEIGHT, r.DARKBLUE);
-    }
+    drawBar(w);
+    drawAvgLine(w);
 
-    drawAvgLine(w.WIDTH, w.newHeights);
     r.EndDrawing();
 }
 
