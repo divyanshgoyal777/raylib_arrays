@@ -1,4 +1,5 @@
-const sketch = require("./averages");
+// const sketch = require("./averages");
+const sketch = require("./peaks")
 
 function loop(world) {
     while (sketch.running()) {
