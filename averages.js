@@ -4,6 +4,26 @@ function running() {
     return !r.WindowShouldClose();
 }
 
+function findMax(data) {
+    let max = -Infinity;
+
+    for (const num of data) {
+        max = num >= max ? num : max;
+    }
+
+    return max;
+}
+
+function calcHeight(data, maxValue, maxHeight, windowHeight) {
+    const newHeights = [];
+
+    for (const num of data) {
+        newHeights.push(windowHeight - (maxHeight * (num / maxValue)));
+    }
+
+    return newHeights;
+}
+
 function setup() {
     const WIDTH = 400;
     const HEIGHT = 400;
@@ -27,26 +47,6 @@ function setup() {
 }
 
 function update() { }
-
-function findMax(data) {
-    let max = -Infinity;
-
-    for (const num of data) {
-        max = num >= max ? num : max;
-    }
-
-    return max;
-}
-
-function calcHeight(data, maxValue, maxHeight, windowHeight) {
-    const newHeights = [];
-
-    for (const num of data) {
-        newHeights.push(windowHeight - (maxHeight * (num / maxValue)));
-    }
-
-    return newHeights;
-}
 
 function calcAverage(data) {
     let sum = 0;
