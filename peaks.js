@@ -25,7 +25,7 @@ function calcHeight(data, maxValue, maxHeight, windowHeight) {
 }
 
 
-function checkIsPeak(left, middle, right) {
+function isPeak(left, middle, right) {
     return middle > left && middle > right;
 }
 
@@ -33,7 +33,7 @@ function getPeakIndicators(data) {
     const peaks = [false];
 
     for (let i = 1; i < data.length; i++) {
-        peaks.push(checkIsPeak(data[i - 1], data[i], data[i + 1]));
+        peaks.push(isPeak(data[i - 1], data[i], data[i + 1]));
     }
 
     return peaks;
